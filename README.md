@@ -40,28 +40,49 @@ highlight.vim should Just Work™.
 ### 16-Color Terminals
 
 If you're on a 16-color terminal, you'll have to configure your terminal's
-palette. Here's a table of colors:
+palette. Here's a sample `.Xresources`. Use it directly, or import it into
+[terminal.sexy][terminal.sexy] then export to any needed format.
+
+[terminal.sexy]: https://terminal.sexy
 
 ```
-COLOR       HEX
-foreground  #d0d0d0
-background  #303030
-color 0     #303030
-color 1     #ff8787
-color 2     #87d787
-color 3     #ffd75f
-color 4     #5f87d7
-color 5     #d787d7
-color 6     #5fd7d7
-color 7     #d0d0d0
-color 8     #767676
-color 9     #ff8787
-color 10    #87d787
-color 11    #ffd75f
-color 12    #5f87d7
-color 13    #d787d7
-color 14    #5fd7d7
-color 15    #d0d0d0
+/* ! HIGHLIGHT */
+/* ! special */
+*.foreground:   #d0d0d0
+*.background:   #303030
+*.cursorColor:  #d0d0d0
+
+! black
+*.color0:       #303030
+*.color8:       #767676
+
+! red
+*.color1:       #ff8787
+*.color9:       #ff8787
+
+! green
+*.color2:       #87d787
+*.color10:      #87d787
+
+! yellow
+*.color3:       #ffd75f
+*.color11:      #ffd75f
+
+! blue
+*.color4:       #5f87d7
+*.color12:      #5f87d7
+
+! magenta
+*.color5:       #d787d7
+*.color13:      #d787d7
+
+! cyan
+*.color6:       #5fd7d7
+*.color14:      #5fd7d7
+
+! white
+*.color7:       #d0d0d0
+*.color15:      #d0d0d0
 ```
 
 ## FAQs
