@@ -1,110 +1,119 @@
 " Author: Ian Emnace <igemnace@gmail.com>
+" Palette:
+" black      236  #303030
+" red        210  #ff8787
+" green      114  #87d787
+" yellow     221  #ffd75f
+" blue       68   #5f87d7
+" magenta    176  #d787d7
+" cyan       80   #5fd7d7
+" white      252  #d0d0d0
+" lightgray  243  #767676
+" darkgray   237  #3a3a3a
 
-""" COLORSCHEME BOILERPLATE
+""" COLORSCHEME BOILERPLATE {{{
 highlight clear
 if exists('syntax_on')
   syntax reset
 endif
 let g:colors_name = 'highlight'
+""" END COLORSCHEME BOILERPLATE }}}
 
-" TODO: cast each palette color into its Xterm equivalent
-" TODO: prepare 2 blocks, based on environment:
-" A. Full-featured: cterm colors are Xterm (for 256 colors), gui colors are hex equivalent
-" B. 16-color palette: cterm colors are 16-color palette colors (will take on terminal colorscheme)
-" TODO: clean up all links. there should only be a few base syntax highlighting groups
-" Normal (white fg, black bg)
-" Comment (light gray fg, black bg)
-" String (green fg, black bg)
-" Special (cyan fg, black bg)
-" Todo (yellow fg, dark gray bg)
-" TODO: create highlight groups for fg colors, e.g. TextRed, TextGreen, etc, for easy linking
+""" ENVIRONMENT-DEPENDENT HIGHLIGHTS {{{
+" Allows for graceful degradation:
+" 1. Exact hex colors for GUI and termguicolors
+" 2. Xterm palette equivalent for 256-color terminals
+" 3. ANSI color equivalent for 16-color terminals
+" See: https://github.com/romainl/vim-rnb and the logic behind it
 
-""" EDITOR CHROME
-"" Default highlight groups
-highlight Bold             cterm=bold      ctermfg=NONE ctermbg=NONE gui=bold      guifg=NONE    guibg=NONE    guisp=NONE
-highlight ColorColumn      cterm=NONE      ctermfg=NONE ctermbg=237  gui=NONE      guifg=NONE    guibg=#3a3a3a guisp=NONE
-highlight Conceal          cterm=NONE      ctermfg=4    ctermbg=0    gui=NONE      guifg=#6699cc guibg=#2d2d2d guisp=NONE
-highlight CursorColumn     cterm=NONE      ctermfg=NONE ctermbg=237  gui=NONE      guifg=NONE    guibg=#3a3a3a guisp=NONE
-highlight Cursor           cterm=NONE      ctermfg=0    ctermbg=7    gui=NONE      guifg=#2d2d2d guibg=#d3d0c8 guisp=NONE
-highlight CursorLineNr     cterm=NONE      ctermfg=8    ctermbg=0    gui=NONE      guifg=#747369 guibg=#2d2d2d guisp=NONE
-highlight CursorLine       cterm=NONE      ctermfg=NONE ctermbg=237  gui=NONE      guifg=NONE    guibg=#3a3a3a guisp=NONE
-highlight Debug            cterm=NONE      ctermfg=1    ctermbg=NONE gui=NONE      guifg=#f2777a guibg=NONE    guisp=NONE
-highlight DiffAdd          cterm=bold      ctermfg=2    ctermbg=237  gui=bold      guifg=#99cc99 guibg=#3a3a3a guisp=NONE
-highlight DiffChange       cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3a3a3a guisp=NONE
-highlight DiffDelete       cterm=NONE      ctermfg=1    ctermbg=237  gui=NONE      guifg=#f2777a guibg=#3a3a3a guisp=NONE
-highlight DiffText         cterm=bold      ctermfg=3    ctermbg=237  gui=bold      guifg=#ffcc66 guibg=#3a3a3a guisp=NONE
-highlight Directory        cterm=NONE      ctermfg=4    ctermbg=NONE gui=NONE      guifg=#6699cc guibg=NONE    guisp=NONE
-highlight EndOfBuffer      cterm=NONE      ctermfg=8    ctermbg=NONE gui=NONE      guifg=#747369 guibg=NONE    guisp=NONE
-highlight ErrorMsg         cterm=NONE      ctermfg=1    ctermbg=0    gui=NONE      guifg=#f2777a guibg=#2d2d2d guisp=NONE
-highlight Error            cterm=NONE      ctermfg=0    ctermbg=1    gui=NONE      guifg=#2d2d2d guibg=#f2777a guisp=NONE
-highlight FoldColumn       cterm=NONE      ctermfg=8    ctermbg=0    gui=NONE      guifg=#747369 guibg=#2d2d2d guisp=NONE
-highlight Folded           cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3a3a3a guisp=NONE
-highlight Ignore           cterm=NONE      ctermfg=0    ctermbg=NONE gui=NONE      guifg=#2d2d2d guibg=NONE    guisp=NONE
-highlight IncSearch        cterm=NONE      ctermfg=237  ctermbg=8    gui=NONE      guifg=#3a3a3a guibg=#747369 guisp=NONE
-highlight lCursor          cterm=NONE      ctermfg=NONE ctermbg=NONE gui=NONE      guifg=NONE    guibg=NONE    guisp=NONE
-highlight LineNr           cterm=NONE      ctermfg=8    ctermbg=0    gui=NONE      guifg=#747369 guibg=#2d2d2d guisp=NONE
-highlight Macro            cterm=NONE      ctermfg=1    ctermbg=NONE gui=NONE      guifg=#f2777a guibg=NONE    guisp=NONE
-highlight MatchParen       cterm=NONE      ctermfg=NONE ctermbg=237  gui=NONE      guifg=NONE    guibg=#3a3a3a guisp=NONE
-highlight ModeMsg          cterm=bold      ctermfg=2    ctermbg=NONE gui=bold      guifg=#99cc99 guibg=NONE    guisp=NONE
-highlight MoreMsg          cterm=NONE      ctermfg=2    ctermbg=NONE gui=NONE      guifg=#99cc99 guibg=NONE    guisp=NONE
-highlight NonText          cterm=NONE      ctermfg=8    ctermbg=NONE gui=NONE      guifg=#747369 guibg=NONE    guisp=NONE
-highlight Normal           cterm=NONE      ctermfg=7    ctermbg=0    gui=NONE      guifg=#d3d0c8 guibg=#2d2d2d guisp=NONE
-highlight Pmenu            cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3a3a3a guisp=NONE
-highlight PmenuSbar        cterm=NONE      ctermfg=NONE ctermbg=237  gui=NONE      guifg=NONE    guibg=#3a3a3a guisp=NONE
-highlight PmenuSel         cterm=NONE      ctermfg=3    ctermbg=237  gui=NONE      guifg=#ffcc66 guibg=#3a3a3a guisp=NONE
-highlight PmenuThumb       cterm=NONE      ctermfg=NONE ctermbg=8    gui=NONE      guifg=NONE    guibg=#747369 guisp=NONE
-highlight Question         cterm=NONE      ctermfg=4    ctermbg=NONE gui=NONE      guifg=#6699cc guibg=NONE    guisp=NONE
-highlight QuickFixLine     cterm=underline ctermfg=NONE ctermbg=NONE gui=underline guifg=NONE    guibg=NONE    guisp=NONE
-highlight Search           cterm=NONE      ctermfg=237  ctermbg=8    gui=NONE      guifg=#3a3a3a guibg=#747369 guisp=NONE
-highlight SignColumn       cterm=NONE      ctermfg=237  ctermbg=0    gui=NONE      guifg=#3a3a3a guibg=#2d2d2d guisp=NONE
-highlight SpecialKey       cterm=NONE      ctermfg=8    ctermbg=NONE gui=NONE      guifg=#747369 guibg=NONE    guisp=NONE
-highlight SpellBad         cterm=underline ctermfg=7    ctermbg=0    gui=underline guifg=#d3d0c8 guibg=#2d2d2d guisp=NONE
-highlight SpellCap         cterm=NONE      ctermfg=NONE ctermbg=0    gui=NONE      guifg=NONE    guibg=#2d2d2d guisp=NONE
-highlight SpellLocal       cterm=NONE      ctermfg=NONE ctermbg=0    gui=NONE      guifg=NONE    guibg=#2d2d2d guisp=NONE
-highlight SpellRare        cterm=NONE      ctermfg=NONE ctermbg=0    gui=NONE      guifg=NONE    guibg=#2d2d2d guisp=NONE
-highlight StatusLineNC     cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3b3b3b guisp=NONE
-highlight StatusLine       cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3a3a3a guisp=NONE
-highlight StatusLineTermNC cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3a3a3a guisp=NONE
-highlight StatusLineTerm   cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3a3a3a guisp=NONE
-highlight TabLineFill      cterm=NONE      ctermfg=237  ctermbg=237  gui=NONE      guifg=#3a3a3a guibg=#3a3a3a guisp=NONE
-highlight TabLineSel       cterm=NONE      ctermfg=3    ctermbg=237  gui=NONE      guifg=#ffcc66 guibg=#3a3a3a guisp=NONE
-highlight TabLine          cterm=NONE      ctermfg=8    ctermbg=237  gui=NONE      guifg=#747369 guibg=#3a3a3a guisp=NONE
-highlight Title            cterm=NONE      ctermfg=4    ctermbg=NONE gui=NONE      guifg=#6699cc guibg=NONE    guisp=NONE
-highlight TooLong          cterm=NONE      ctermfg=1    ctermbg=NONE gui=NONE      guifg=#f2777a guibg=NONE    guisp=NONE
-highlight Underlined       cterm=underline ctermfg=1    ctermbg=NONE gui=underline guifg=#f2777a guibg=NONE    guisp=NONE
-highlight VertSplit        cterm=NONE      ctermfg=0    ctermbg=0    gui=NONE      guifg=#2d2d2d guibg=#2d2d2d guisp=NONE
-highlight VisualNOS        cterm=NONE      ctermfg=1    ctermbg=NONE gui=NONE      guifg=#f2777a guibg=NONE    guisp=NONE
-highlight Visual           cterm=NONE      ctermfg=NONE ctermbg=237  gui=NONE      guifg=NONE    guibg=#3a3a3a guisp=NONE
-highlight WarningMsg       cterm=NONE      ctermfg=1    ctermbg=NONE gui=NONE      guifg=#f2777a guibg=NONE    guisp=NONE
-highlight WildMenu         cterm=NONE      ctermfg=3    ctermbg=237  gui=NONE      guifg=#ffcc66 guibg=#3a3a3a guisp=NONE
-highlight clear Italic
-
-"" User highlight groups: useful for statusline, where the background is dark gray
-highlight User1 cterm=NONE ctermfg=1 ctermbg=237 gui=NONE guifg=#f2777a guibg=#3a3a3a guisp=NONE
-highlight User2 cterm=NONE ctermfg=2 ctermbg=237 gui=NONE guifg=#99cc99 guibg=#3a3a3a guisp=NONE
-highlight User3 cterm=NONE ctermfg=3 ctermbg=237 gui=NONE guifg=#ffcc66 guibg=#3a3a3a guisp=NONE
-highlight User4 cterm=NONE ctermfg=4 ctermbg=237 gui=NONE guifg=#6699cc guibg=#3a3a3a guisp=NONE
-highlight User5 cterm=NONE ctermfg=5 ctermbg=237 gui=NONE guifg=#cc99cc guibg=#3a3a3a guisp=NONE
-highlight User6 cterm=NONE ctermfg=6 ctermbg=237 gui=NONE guifg=#66cccc guibg=#3a3a3a guisp=NONE
-highlight User7 cterm=NONE ctermfg=7 ctermbg=237 gui=NONE guifg=#d3d0c8 guibg=#3a3a3a guisp=NONE
-
-""" SYNTAX PALETTE
 if $TERM =~ '256' || &t_Co >= 256 || has('gui_running')
-  " Case: full-featured
-  highlight TextRed        cterm=NONE  ctermfg=1    ctermbg=NONE  gui=NONE  guifg=#f2777a  guibg=NONE  guisp=NONE
-  highlight TextGreen      cterm=NONE  ctermfg=2    ctermbg=NONE  gui=NONE  guifg=#99cc99  guibg=NONE  guisp=NONE
-  highlight TextYellow     cterm=NONE  ctermfg=3    ctermbg=NONE  gui=NONE  guifg=#ffcc66  guibg=NONE  guisp=NONE
-  highlight TextBlue       cterm=NONE  ctermfg=4    ctermbg=NONE  gui=NONE  guifg=#6699cc  guibg=NONE  guisp=NONE
-  highlight TextMagenta    cterm=NONE  ctermfg=5    ctermbg=NONE  gui=NONE  guifg=#cc99cc  guibg=NONE  guisp=NONE
-  highlight TextCyan       cterm=NONE  ctermfg=6    ctermbg=NONE  gui=NONE  guifg=#66cccc  guibg=NONE  guisp=NONE
-  highlight TextWhite      cterm=NONE  ctermfg=7    ctermbg=NONE  gui=NONE  guifg=#d3d0c8  guibg=NONE  guisp=NONE
-  highlight TextLightGray  cterm=NONE  ctermfg=8    ctermbg=NONE  gui=NONE  guifg=#747369  guibg=NONE  guisp=NONE
-  highlight TextDarkGray   cterm=NONE  ctermfg=237  ctermbg=NONE  gui=NONE  guifg=#3a3a3a  guibg=NONE  guisp=NONE
+  """ FULL-FEATURED {{{
+  " Xterm palette for cterm, hex for GUI
 
+  " Syntax groups: convenient highlight groups for syntax highlighting
+  highlight Normal         cterm=NONE  ctermfg=252  ctermbg=236   gui=NONE  guifg=#d0d0d0  guibg=#303030  guisp=NONE
+  highlight TextRed        cterm=NONE  ctermfg=210  ctermbg=NONE  gui=NONE  guifg=#ff8787  guibg=NONE     guisp=NONE
+  highlight TextGreen      cterm=NONE  ctermfg=114  ctermbg=NONE  gui=NONE  guifg=#87d787  guibg=NONE     guisp=NONE
+  highlight TextYellow     cterm=NONE  ctermfg=221  ctermbg=NONE  gui=NONE  guifg=#ffd75f  guibg=NONE     guisp=NONE
+  highlight TextBlue       cterm=NONE  ctermfg=68   ctermbg=NONE  gui=NONE  guifg=#5f87d7  guibg=NONE     guisp=NONE
+  highlight TextMagenta    cterm=NONE  ctermfg=176  ctermbg=NONE  gui=NONE  guifg=#d787d7  guibg=NONE     guisp=NONE
+  highlight TextCyan       cterm=NONE  ctermfg=80   ctermbg=NONE  gui=NONE  guifg=#5fd7d7  guibg=NONE     guisp=NONE
+  highlight TextWhite      cterm=NONE  ctermfg=252  ctermbg=NONE  gui=NONE  guifg=#d0d0d0  guibg=NONE     guisp=NONE
+  highlight TextLightGray  cterm=NONE  ctermfg=243  ctermbg=NONE  gui=NONE  guifg=#767676  guibg=NONE     guisp=NONE
+  highlight TextDarkGray   cterm=NONE  ctermfg=237  ctermbg=NONE  gui=NONE  guifg=#3a3a3a  guibg=NONE     guisp=NONE
+
+  " User highlight groups: useful for statusline, where the background is dark gray
+  highlight User1  cterm=NONE  ctermfg=1  ctermbg=237  gui=NONE  guifg=#ff8787  guibg=#3a3a3a  guisp=NONE
+  highlight User2  cterm=NONE  ctermfg=2  ctermbg=237  gui=NONE  guifg=#87d787  guibg=#3a3a3a  guisp=NONE
+  highlight User3  cterm=NONE  ctermfg=3  ctermbg=237  gui=NONE  guifg=#ffd75f  guibg=#3a3a3a  guisp=NONE
+  highlight User4  cterm=NONE  ctermfg=4  ctermbg=237  gui=NONE  guifg=#5f87d7  guibg=#3a3a3a  guisp=NONE
+  highlight User5  cterm=NONE  ctermfg=5  ctermbg=237  gui=NONE  guifg=#d787d7  guibg=#3a3a3a  guisp=NONE
+  highlight User6  cterm=NONE  ctermfg=6  ctermbg=237  gui=NONE  guifg=#5fd7d7  guibg=#3a3a3a  guisp=NONE
+  highlight User7  cterm=NONE  ctermfg=7  ctermbg=237  gui=NONE  guifg=#d0d0d0  guibg=#3a3a3a  guisp=NONE
+
+  " Editor chrome
+  highlight Bold              cterm=bold       ctermfg=NONE  ctermbg=NONE  gui=bold       guifg=NONE     guibg=NONE     guisp=NONE
+  highlight ColorColumn       cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
+  highlight Conceal           cterm=NONE       ctermfg=68    ctermbg=236   gui=NONE       guifg=#5f87d7  guibg=#303030  guisp=NONE
+  highlight Cursor            cterm=NONE       ctermfg=236   ctermbg=252   gui=NONE       guifg=#303030  guibg=#d0d0d0  guisp=NONE
+  highlight CursorColumn      cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
+  highlight CursorLine        cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
+  highlight CursorLineNr      cterm=NONE       ctermfg=243   ctermbg=236   gui=NONE       guifg=#767676  guibg=#303030  guisp=NONE
+  highlight Debug             cterm=NONE       ctermfg=210   ctermbg=NONE  gui=NONE       guifg=#ff8787  guibg=NONE     guisp=NONE
+  highlight DiffAdd           cterm=bold       ctermfg=114   ctermbg=237   gui=bold       guifg=#87d787  guibg=#3a3a3a  guisp=NONE
+  highlight DiffChange        cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
+  highlight DiffDelete        cterm=NONE       ctermfg=210   ctermbg=237   gui=NONE       guifg=#ff8787  guibg=#3a3a3a  guisp=NONE
+  highlight DiffText          cterm=bold       ctermfg=221   ctermbg=237   gui=bold       guifg=#ffd75f  guibg=#3a3a3a  guisp=NONE
+  highlight Directory         cterm=NONE       ctermfg=68    ctermbg=NONE  gui=NONE       guifg=#5f87d7  guibg=NONE     guisp=NONE
+  highlight EndOfBuffer       cterm=NONE       ctermfg=243   ctermbg=NONE  gui=NONE       guifg=#767676  guibg=NONE     guisp=NONE
+  highlight Error             cterm=NONE       ctermfg=236   ctermbg=210   gui=NONE       guifg=#303030  guibg=#ff8787  guisp=NONE
+  highlight ErrorMsg          cterm=NONE       ctermfg=210   ctermbg=236   gui=NONE       guifg=#ff8787  guibg=#303030  guisp=NONE
+  highlight FoldColumn        cterm=NONE       ctermfg=243   ctermbg=236   gui=NONE       guifg=#767676  guibg=#303030  guisp=NONE
+  highlight Folded            cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
+  highlight Ignore            cterm=NONE       ctermfg=236   ctermbg=NONE  gui=NONE       guifg=#303030  guibg=NONE     guisp=NONE
+  highlight IncSearch         cterm=NONE       ctermfg=237   ctermbg=243   gui=NONE       guifg=#3a3a3a  guibg=#767676  guisp=NONE
+  highlight LineNr            cterm=NONE       ctermfg=243   ctermbg=236   gui=NONE       guifg=#767676  guibg=#303030  guisp=NONE
+  highlight Macro             cterm=NONE       ctermfg=210   ctermbg=NONE  gui=NONE       guifg=#ff8787  guibg=NONE     guisp=NONE
+  highlight MatchParen        cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
+  highlight ModeMsg           cterm=bold       ctermfg=114   ctermbg=NONE  gui=bold       guifg=#87d787  guibg=NONE     guisp=NONE
+  highlight MoreMsg           cterm=NONE       ctermfg=114   ctermbg=NONE  gui=NONE       guifg=#87d787  guibg=NONE     guisp=NONE
+  highlight NonText           cterm=NONE       ctermfg=243   ctermbg=NONE  gui=NONE       guifg=#767676  guibg=NONE     guisp=NONE
+  highlight Pmenu             cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
+  highlight PmenuSbar         cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
+  highlight PmenuSel          cterm=NONE       ctermfg=221   ctermbg=237   gui=NONE       guifg=#ffd75f  guibg=#3a3a3a  guisp=NONE
+  highlight PmenuThumb        cterm=NONE       ctermfg=NONE  ctermbg=243   gui=NONE       guifg=NONE     guibg=#767676  guisp=NONE
+  highlight Question          cterm=NONE       ctermfg=68    ctermbg=NONE  gui=NONE       guifg=#5f87d7  guibg=NONE     guisp=NONE
+  highlight QuickFixLine      cterm=underline  ctermfg=NONE  ctermbg=NONE  gui=underline  guifg=NONE     guibg=NONE     guisp=NONE
+  highlight Search            cterm=NONE       ctermfg=237   ctermbg=243   gui=NONE       guifg=#3a3a3a  guibg=#767676  guisp=NONE
+  highlight SignColumn        cterm=NONE       ctermfg=237   ctermbg=236   gui=NONE       guifg=#3a3a3a  guibg=#303030  guisp=NONE
+  highlight SpecialKey        cterm=NONE       ctermfg=243   ctermbg=NONE  gui=NONE       guifg=#767676  guibg=NONE     guisp=NONE
+  highlight SpellBad          cterm=underline  ctermfg=252   ctermbg=236   gui=underline  guifg=#d0d0d0  guibg=#303030  guisp=NONE
+  highlight SpellCap          cterm=NONE       ctermfg=NONE  ctermbg=236   gui=NONE       guifg=NONE     guibg=#303030  guisp=NONE
+  highlight SpellLocal        cterm=NONE       ctermfg=NONE  ctermbg=236   gui=NONE       guifg=NONE     guibg=#303030  guisp=NONE
+  highlight SpellRare         cterm=NONE       ctermfg=NONE  ctermbg=236   gui=NONE       guifg=NONE     guibg=#303030  guisp=NONE
+  highlight StatusLine        cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
+  highlight StatusLineNC      cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3b3b3b  guisp=NONE
+  highlight StatusLineTerm    cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
+  highlight StatusLineTermNC  cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
+  highlight TabLine           cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
+  highlight TabLineFill       cterm=NONE       ctermfg=237   ctermbg=237   gui=NONE       guifg=#3a3a3a  guibg=#3a3a3a  guisp=NONE
+  highlight TabLineSel        cterm=NONE       ctermfg=221   ctermbg=237   gui=NONE       guifg=#ffd75f  guibg=#3a3a3a  guisp=NONE
+  highlight Title             cterm=NONE       ctermfg=68    ctermbg=NONE  gui=NONE       guifg=#5f87d7  guibg=NONE     guisp=NONE
+  highlight TooLong           cterm=NONE       ctermfg=210   ctermbg=NONE  gui=NONE       guifg=#ff8787  guibg=NONE     guisp=NONE
+  highlight Underlined        cterm=underline  ctermfg=210   ctermbg=NONE  gui=underline  guifg=#ff8787  guibg=NONE     guisp=NONE
+  highlight VertSplit         cterm=NONE       ctermfg=236   ctermbg=236   gui=NONE       guifg=#303030  guibg=#303030  guisp=NONE
+  highlight Visual            cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
+  highlight VisualNOS         cterm=NONE       ctermfg=210   ctermbg=NONE  gui=NONE       guifg=#ff8787  guibg=NONE     guisp=NONE
+  highlight WarningMsg        cterm=NONE       ctermfg=210   ctermbg=NONE  gui=NONE       guifg=#ff8787  guibg=NONE     guisp=NONE
+  highlight WildMenu          cterm=NONE       ctermfg=221   ctermbg=237   gui=NONE       guifg=#ffd75f  guibg=#3a3a3a  guisp=NONE
+  highlight lCursor           cterm=NONE       ctermfg=NONE  ctermbg=NONE  gui=NONE       guifg=NONE     guibg=NONE     guisp=NONE
+  "" FULL-FEATURED }}}
 elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
-  " Case: 16-color palette
+  """ 16-COLOR PALETTE {{{
   set t_Co=16
 
+  " Syntax groups: convenient highlight groups for syntax highlighting
+  highlight Normal         cterm=NONE  ctermfg=7  ctermbg=0
   highlight TextRed        cterm=NONE  ctermfg=1  ctermbg=NONE
   highlight TextGreen      cterm=NONE  ctermfg=2  ctermbg=NONE
   highlight TextYellow     cterm=NONE  ctermfg=3  ctermbg=NONE
@@ -113,18 +122,109 @@ elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
   highlight TextCyan       cterm=NONE  ctermfg=6  ctermbg=NONE
   highlight TextWhite      cterm=NONE  ctermfg=7  ctermbg=NONE
   highlight TextLightGray  cterm=NONE  ctermfg=8  ctermbg=NONE
-
   " We only get 1 gray on a 16-color palette: color 8
   highlight! link  TextDarkGray  TextLightGray
+
+  " User highlight groups
+  highlight User1  cterm=NONE  ctermfg=1  ctermbg=8
+  highlight User2  cterm=NONE  ctermfg=2  ctermbg=8
+  highlight User3  cterm=NONE  ctermfg=3  ctermbg=8
+  highlight User4  cterm=NONE  ctermfg=4  ctermbg=8
+  highlight User5  cterm=NONE  ctermfg=5  ctermbg=8
+  highlight User6  cterm=NONE  ctermfg=6  ctermbg=8
+  highlight User7  cterm=NONE  ctermfg=7  ctermbg=8
+
+  " Editor chrome
+  highlight Bold             cterm=bold      ctermfg=NONE ctermbg=NONE
+  highlight ColorColumn      cterm=NONE      ctermfg=NONE ctermbg=8
+  highlight Conceal          cterm=NONE      ctermfg=4    ctermbg=0
+  highlight Cursor           cterm=NONE      ctermfg=0    ctermbg=7
+  highlight CursorColumn     cterm=NONE      ctermfg=NONE ctermbg=8
+  highlight CursorLine       cterm=NONE      ctermfg=NONE ctermbg=8
+  highlight CursorLineNr     cterm=NONE      ctermfg=7    ctermbg=0
+  highlight Debug            cterm=NONE      ctermfg=1    ctermbg=NONE
+  highlight DiffAdd          cterm=bold      ctermfg=2    ctermbg=8
+  highlight DiffChange       cterm=NONE      ctermfg=7    ctermbg=8
+  highlight DiffDelete       cterm=NONE      ctermfg=1    ctermbg=8
+  highlight DiffText         cterm=bold      ctermfg=3    ctermbg=8
+  highlight Directory        cterm=NONE      ctermfg=4    ctermbg=NONE
+  highlight EndOfBuffer      cterm=NONE      ctermfg=7    ctermbg=NONE
+  highlight Error            cterm=NONE      ctermfg=0    ctermbg=1
+  highlight ErrorMsg         cterm=NONE      ctermfg=1    ctermbg=0
+  highlight FoldColumn       cterm=NONE      ctermfg=7    ctermbg=0
+  highlight Folded           cterm=NONE      ctermfg=7    ctermbg=8
+  highlight Ignore           cterm=NONE      ctermfg=0    ctermbg=NONE
+  highlight IncSearch        cterm=NONE      ctermfg=8    ctermbg=7
+  highlight LineNr           cterm=NONE      ctermfg=7    ctermbg=0
+  highlight Macro            cterm=NONE      ctermfg=1    ctermbg=NONE
+  highlight MatchParen       cterm=NONE      ctermfg=NONE ctermbg=8
+  highlight ModeMsg          cterm=bold      ctermfg=2    ctermbg=NONE
+  highlight MoreMsg          cterm=NONE      ctermfg=2    ctermbg=NONE
+  highlight NonText          cterm=NONE      ctermfg=7    ctermbg=NONE
+  highlight Pmenu            cterm=NONE      ctermfg=7    ctermbg=8
+  highlight PmenuSbar        cterm=NONE      ctermfg=NONE ctermbg=8
+  highlight PmenuSel         cterm=NONE      ctermfg=3    ctermbg=8
+  highlight PmenuThumb       cterm=NONE      ctermfg=NONE ctermbg=8
+  highlight Question         cterm=NONE      ctermfg=4    ctermbg=NONE
+  highlight QuickFixLine     cterm=underline ctermfg=NONE ctermbg=NONE
+  highlight Search           cterm=NONE      ctermfg=8    ctermbg=7
+  highlight SignColumn       cterm=NONE      ctermfg=8    ctermbg=0
+  highlight SpecialKey       cterm=NONE      ctermfg=7    ctermbg=NONE
+  highlight SpellBad         cterm=underline ctermfg=7    ctermbg=0
+  highlight SpellCap         cterm=NONE      ctermfg=NONE ctermbg=0
+  highlight SpellLocal       cterm=NONE      ctermfg=NONE ctermbg=0
+  highlight SpellRare        cterm=NONE      ctermfg=NONE ctermbg=0
+  highlight StatusLine       cterm=NONE      ctermfg=7    ctermbg=8
+  highlight StatusLineNC     cterm=NONE      ctermfg=7    ctermbg=8
+  highlight StatusLineTerm   cterm=NONE      ctermfg=7    ctermbg=8
+  highlight StatusLineTermNC cterm=NONE      ctermfg=7    ctermbg=8
+  highlight TabLine          cterm=NONE      ctermfg=7    ctermbg=8
+  highlight TabLineFill      cterm=NONE      ctermfg=8    ctermbg=8
+  highlight TabLineSel       cterm=NONE      ctermfg=3    ctermbg=8
+  highlight Title            cterm=NONE      ctermfg=4    ctermbg=NONE
+  highlight TooLong          cterm=NONE      ctermfg=1    ctermbg=NONE
+  highlight Underlined       cterm=underline ctermfg=1    ctermbg=NONE
+  highlight VertSplit        cterm=NONE      ctermfg=0    ctermbg=0
+  highlight Visual           cterm=NONE      ctermfg=NONE ctermbg=8
+  highlight VisualNOS        cterm=NONE      ctermfg=1    ctermbg=NONE
+  highlight WarningMsg       cterm=NONE      ctermfg=1    ctermbg=NONE
+  highlight WildMenu         cterm=NONE      ctermfg=3    ctermbg=8
+  highlight lCursor          cterm=NONE      ctermfg=NONE ctermbg=NONE
+  """ END 16-COLOR PALETTE }}}
 endif
 
-""" NON-FT-SPECIFIC SYNTAX
-"" Base groups: only these groups + Normal will form the foundation of syntax highlighting
+""" TERMINAL ANSI COLORS {{{
+if (has('termguicolors') && &termguicolors) || has('gui_running')
+  let g:terminal_ansi_colors = [
+        \ '#303030',
+        \ '#ff8787',
+        \ '#87d787',
+        \ '#ffd75f',
+        \ '#5f87d7',
+        \ '#d787d7',
+        \ '#5fd7d7',
+        \ '#d0d0d0',
+        \ '#767676',
+        \ '#ff8787',
+        \ '#87d787',
+        \ '#ffd75f',
+        \ '#5f87d7',
+        \ '#d787d7',
+        \ '#5fd7d7',
+        \ '#d0d0d0',
+        \ ]
+endif
+""" END TERMINAL ANSI COLORS }}}
+""" END ENVIRONMENT-DEPENDENT HIGHLIGHTS }}}
+
+""" NON-FT-SPECIFIC SYNTAX {{{
+" Base groups: only these groups + Normal will form the foundation of syntax highlighting
 highlight! link  Comment  TextLightGray
 highlight! link  String   TextGreen
 highlight! link  Special  TextCyan
 highlight! link  Todo     TextYellow
-"" Linked groups: 
+
+" Linked groups:
 highlight! link  Boolean       Normal
 highlight! link  Conditional   Normal
 highlight! link  Constant      Normal
@@ -151,7 +251,11 @@ highlight! link  Character     String
 highlight! link  SpecialChar   Special
 highlight! link  Tag           Todo
 
-""" FT-SPECIFIC SYNTAX
+" Clear italic, I don't like it
+highlight clear Italic
+""" END NON-FT-SPECIFIC SYNTAX }}}
+
+""" FT-SPECIFIC SYNTAX {{{
 "" Mostly just making sure straggler highlight groups are linked back to Normal
 "" With a few exceptions getting their own colors
 
@@ -340,5 +444,6 @@ highlight! link  tmuxKey  Normal
 " i3
 highlight! link  i3ConfigVariableModifier  Normal
 highlight! link  i3ConfigString            String
+""" END FT-SPECIFIC SYNTAX }}}
 
-" vim: nowrap:tw=0
+" vim: fdm=marker:nowrap:tw=0
