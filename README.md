@@ -1,6 +1,7 @@
 # highlight.vim
 
-A curated Vim colorscheme with reduced syntax highlighting.
+A simple, low-contrast Vim colorscheme with (drastically) reduced syntax
+highlighting.
 
 ![c](https://files.emnace.org/igemnace/highlight.vim/c.png)
 
