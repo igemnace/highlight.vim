@@ -305,6 +305,13 @@ highlight! link  htmlSpecialTagName  Normal
 highlight! link  htmlTag             Normal
 highlight! link  htmlTagName         Normal
 highlight! link  htmlTitle           Normal
+highlight! link  htmlH1              Normal
+highlight! link  htmlH2              Normal
+highlight! link  htmlH3              Normal
+highlight! link  htmlH4              Normal
+highlight! link  htmlH5              Normal
+highlight! link  htmlH6              Normal
+highlight! link  htmlLink            Special
 
 " Pug
 highlight! link  pugClassChar     Normal
