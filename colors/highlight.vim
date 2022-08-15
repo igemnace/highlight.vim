@@ -370,7 +370,10 @@ highlight! link  jsUndefined          Normal
 " TypeScript
 highlight! link  typescriptDecorators     Normal
 highlight! link  typescriptExceptions     Normal
+highlight! link  typescriptExport         Normal
 highlight! link  typescriptGlobalObjects  Normal
+highlight! link  typescriptImport         Normal
+highlight! link  typescriptTry            Normal
 
 " Shell
 " Highlighting parameter expansions within a string is useful
