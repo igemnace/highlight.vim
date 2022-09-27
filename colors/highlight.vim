@@ -367,6 +367,16 @@ highlight! link  jsThis               Normal
 highlight! link  jsTry                Normal
 highlight! link  jsUndefined          Normal
 
+" JSX
+highlight! link  typescriptStringS      String
+highlight! link  typescriptComment      Comment
+highlight! link  typescriptLineComment  Comment
+highlight! link  typescriptDocComment   Comment
+highlight! link  typescriptCommentTodo  Todo
+highlight! link  jsxBraces              Normal
+highlight! link  jsxOpenPunct           Normal
+highlight! link  jsxCloseString         Normal
+
 " TypeScript
 highlight! link  typescriptDecorators     Normal
 highlight! link  typescriptExceptions     Normal
